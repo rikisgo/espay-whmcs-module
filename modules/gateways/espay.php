@@ -59,7 +59,15 @@ function espay_config() {
             'Type' => 'text',
             'Size' => '50',
             'Default' => '',
-            'Description' => 'Your Merchant Key here. Get it at www.espay.id',
+            'Description' => 'ID that used for partner identification',
+        ),
+        // a text field type allows for single line text input
+        'espaysignature' => array(
+            'FriendlyName' => 'Signature Key',
+            'Type' => 'text',
+            'Size' => '50',
+            'Default' => '',
+            'Description' => 'Your Signature Key here. Get it from Espay team',
         ),
         // a text field type allows for single line text input
         'espaypassword' => array(
@@ -67,7 +75,7 @@ function espay_config() {
             'Type' => 'password',
             'Size' => '50',
             'Default' => '',
-            'Description' => 'Your Password here. define it by yourself',
+            'Description' => 'Password that used for web service identification',
         ),
         // the dropdown field type renders a select menu of options
         'environment' => array(
@@ -103,6 +111,7 @@ function espay_link($params) {
     // Gateway Configuration Parameters
     $espaymerchantkey = $params['espaymerchantkey'];
     $espaypassword = $params['espaypassword'];
+    $espaysignature = $params['espaysignature'];
     $environment = $params['environment'];
 //    $enable3ds = $params['enable3ds'];
     // Invoice Parameters
@@ -136,6 +145,7 @@ function espay_link($params) {
     Espay_Config::$isProduction = ($environment == 'on') ? true : false;
     Espay_Config::$espaypassword = $espaypassword;
     Espay_Config::$espaymerchantkey = $espaymerchantkey;
+    Espay_Config::$espaysignature = $espaysignature;
     // error_log($enable3ds); //debugan
 //    Espay_Config::$is3ds = ($enable3ds == 'on') ? true : false;
 

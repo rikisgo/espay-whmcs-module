@@ -12,14 +12,15 @@ require_once __DIR__ . '/../../espay-pg/Espay.php';
 $gatewayModuleName = "espay";
 $gatewayParams = getGatewayVariables($gatewayModuleName);
 $espaypassword = $gatewayParams['espaypassword'];
-$espaymerchantkey = $gatewayParams['espaymerchantkey'];
+//$espaymerchantkey = $gatewayParams['espaymerchantkey'];
+$espaysignature =  $gatewayParams['espaysignature'];
 
 $signaturePostman = (!empty($_REQUEST['signature']) ? $_REQUEST['signature'] : '');
 $rq_datetime = (!empty($_REQUEST['rq_datetime']) ? $_REQUEST['rq_datetime'] : '');
 $order_id = (!empty($_REQUEST['order_id']) ? $_REQUEST['order_id'] : '');
 $passwordServer = (!empty($_REQUEST['password']) ? $_REQUEST['password'] : '');
 
-$key = '##' . $espaymerchantkey . '##' . $rq_datetime . '##' . $order_id . '##' . 'INQUIRY' . '##';
+$key = '##' . $espaysignature . '##' . $rq_datetime . '##' . $order_id . '##' . 'INQUIRY' . '##';
 //$key = '##7BC074F97C3131D2E290A4707A54A623##2016-07-25 11:05:49##145000065##INQUIRY##';
 $uppercase = strtoupper($key);
 $signatureKeyRest = hash('sha256', $uppercase);

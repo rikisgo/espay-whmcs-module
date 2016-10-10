@@ -46,7 +46,8 @@ $payment_conf = array(
 $gatewayModuleName = "espay";
 $gatewayParams = getGatewayVariables($gatewayModuleName);
 $espaypassword = $gatewayParams['espaypassword'];
-$espaymerchantkey = $gatewayParams['espaymerchantkey'];
+//$espaymerchantkey = $gatewayParams['espaymerchantkey'];
+$espaysignature = $gatewayParams['espaysignature'];
 
 $signaturePostman = (!empty($_REQUEST['signature']) ? $_REQUEST['signature'] : '');
 $rq_datetime = (!empty($_REQUEST['rq_datetime']) ? $_REQUEST['rq_datetime'] : '');
@@ -57,7 +58,7 @@ $debit_from = (!empty($_REQUEST['debit_from']) ? $_REQUEST['debit_from'] : '');
 $credit_to = (!empty($_REQUEST['credit_to']) ? $_REQUEST['credit_to'] : '');
 $product = (!empty($_REQUEST['product_code']) ? $_REQUEST['product_code'] : '');
 
-$key = '##' . $espaymerchantkey . '##' . $rq_datetime . '##' . $order_id . '##' . 'PAYMENTREPORT' . '##';
+$key = '##' . $espaysignature . '##' . $rq_datetime . '##' . $order_id . '##' . 'PAYMENTREPORT' . '##';
 //$key = '##7BC074F97C3131D2E290A4707A54A623##2016-07-25 11:05:49##145000065##INQUIRY##';
 $uppercase = strtoupper($key);
 $signatureKeyRest = hash('sha256', $uppercase);

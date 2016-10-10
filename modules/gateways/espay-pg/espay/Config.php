@@ -6,16 +6,22 @@
 class Espay_Config {
 
     /**
-     * Your merchant's server key
+     * Your merchant's key
      * @static
      */
     public static $espaymerchantkey;
 
     /**
-     * Your merchant's client key
+     * Your merchant's password, define it by your self
      * @static
      */
     public static $espaypassword;
+
+    /**
+     * Your merchant's signature key
+     * @static
+     */
+    public static $espaysignature;
 
     /**
      * true for production
