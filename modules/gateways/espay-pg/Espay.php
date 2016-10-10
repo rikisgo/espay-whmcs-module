@@ -14,7 +14,7 @@ if (!function_exists('json_decode')) {
 }
 
 // Configurations
-require_once('Espay/Config.php');
+require_once('espay/Config.php');
 
 // Utils
-require_once('Espay/Utils.php');
+require_once('espay/Utils.php');
