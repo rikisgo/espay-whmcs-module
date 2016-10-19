@@ -57,6 +57,9 @@ $passwordServer = (!empty($_REQUEST['password']) ? $_REQUEST['password'] : '');
 $debit_from = (!empty($_REQUEST['debit_from']) ? $_REQUEST['debit_from'] : '');
 $credit_to = (!empty($_REQUEST['credit_to']) ? $_REQUEST['credit_to'] : '');
 $product = (!empty($_REQUEST['product_code']) ? $_REQUEST['product_code'] : '');
+$paidAmount = (!empty($_REQUEST['amount']) ? $_REQUEST['amount'] : '');
+$paymentfee = 0;
+$payment_ref = (!empty($_REQUEST['payment_ref']) ? $_REQUEST['payment_ref'] : '');
 
 $key = '##' . $espaysignature . '##' . $rq_datetime . '##' . $order_id . '##' . 'PAYMENTREPORT' . '##';
 //$key = '##7BC074F97C3131D2E290A4707A54A623##2016-07-25 11:05:49##145000065##INQUIRY##';
@@ -103,7 +106,20 @@ if ($espaypassword == $passwordServer) {
             $isProcessPaidInv = $payment_conf[$espayPaymentType];
 
             if ($isProcessPaidInv) {
-                processPaidInvoice($order_id, false, false);
+                /**
+                 * Add Invoice Payment.
+                 *
+                 * Applies a payment transaction entry to the given invoice ID.
+                 *
+                 * @param int $invoiceId         Invoice ID
+                 * @param string $transactionId  Transaction ID
+                 * @param float $paymentAmount   Amount paid (defaults to full balance)
+                 * @param float $paymentFee      Payment fee (optional)
+                 * @param string $gatewayModule  Gateway module name
+                 */
+                addInvoicePayment(
+                        $invoiceId, $payment_ref, $paidAmount, $paymentFee, $gatewayModuleName
+                );
             }
         }
     } else {
