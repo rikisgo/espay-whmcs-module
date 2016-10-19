@@ -58,7 +58,7 @@ $debit_from = (!empty($_REQUEST['debit_from']) ? $_REQUEST['debit_from'] : '');
 $credit_to = (!empty($_REQUEST['credit_to']) ? $_REQUEST['credit_to'] : '');
 $product = (!empty($_REQUEST['product_code']) ? $_REQUEST['product_code'] : '');
 $paidAmount = (!empty($_REQUEST['amount']) ? $_REQUEST['amount'] : '');
-$paymentfee = 0;
+$paymentfee = (!empty($_REQUEST['payment_fee']) ? $_REQUEST['payment_fee'] : 0);
 $payment_ref = (!empty($_REQUEST['payment_ref']) ? $_REQUEST['payment_ref'] : '');
 
 $key = '##' . $espaysignature . '##' . $rq_datetime . '##' . $order_id . '##' . 'PAYMENTREPORT' . '##';
@@ -117,8 +117,9 @@ if ($espaypassword == $passwordServer) {
                  * @param float $paymentFee      Payment fee (optional)
                  * @param string $gatewayModule  Gateway module name
                  */
+                checkCbTransID($payment_ref);
                 addInvoicePayment(
-                        $invoiceId, $payment_ref, $paidAmount, $paymentFee, $gatewayModuleName
+                        $order_id, $payment_ref, $paidAmount, $paymentFee, $gatewayModuleName
                 );
             }
         }
