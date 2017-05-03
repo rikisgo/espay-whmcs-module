@@ -43,8 +43,8 @@ class Espay_Config {
      */
     public static $curlOptions = array();
 
-    const SANDBOX_BASE_URL = 'http://secure-dev.sgo.co.id/espaysingle/paymentlist';
-    const PRODUCTION_BASE_URL = 'https://secure.sgo.co.id/espaysingle/paymentlist';
+    const SANDBOX_BASE_URL = 'https://sandbox-kit.espay.id/espaysingle/paymentlist';
+    const PRODUCTION_BASE_URL = 'https://kit.espay.id/espaysingle/paymentlist';
 
     /**
      * @return string Espay API URL, depends on $isProduction
